@@ -1,48 +1,4 @@
-![Laravel best practices](/images/logo-english.png?raw=true)
-
-Translations:
-
-[Nederlands](https://github.com/Protoqol/Beste-Laravel-Praktijken) (by [Protoqol](https://github.com/Protoqol))
-
-[Indonesia](indonesia.md) (by [P0rguy](https://github.com/p0rguy), [Doni Ahmad](https://github.com/donyahmd))
-
-[한국어](https://github.com/xotrs/laravel-best-practices) (by [cherrypick](https://github.com/xotrs))
-
-[日本語](japanese.md) (by [2bo](https://github.com/2bo))
-
-[简体中文](chinese.md) (by [xiaoyi](https://github.com/Shiloh520))
-
-[繁體中文](traditional-chinese.md) (by [woeichern](https://github.com/woeichern))
-
-[ภาษาไทย](thai.md) (by [kongvut sangkla](https://github.com/kongvut))
-
-[বাংলা](bangla.md) (by [Anowar Hossain](https://github.com/AnowarCST))
-
-[فارسی](persian.md) (by [amirhossein baghaie](https://github.com/amirbagh75))
-
-[Português](https://github.com/jonaselan/laravel-best-practices) (by [jonaselan](https://github.com/jonaselan))
-
-[Українська](ukrainian.md) (by [Tenevyk](https://github.com/tenevyk))
-
-[Русский](russian.md)
-
-[Tiếng Việt](https://chungnguyen.xyz/posts/code-laravel-lam-sao-cho-chuan) (by [Chung Nguyễn](https://github.com/nguyentranchung))
-
-[Español](spanish.md) (by [César Escudero](https://github.com/cedaesca))
-
-[Français](french.md) (by [Mikayil S.](https://github.com/mikayilsrt))
-
-[Polski](polish.md) (by [Karol Pietruszka](https://github.com/pietrushek))
-
-[Türkçe](turkish.md) (by [Burak](https://github.com/ikidnapmyself))
-
-[Deutsch](german.md) (by [Sujal Patel](https://github.com/sujalpatel2209))
-
-[Italiana](italian.md) (by [Sujal Patel](https://github.com/sujalpatel2209))
-
-[Azərbaycanca](https://github.com/Maharramoff/laravel-best-practices-az) (by [Maharramoff](https://github.com/Maharramoff))
-
-[العربية](arabic.md) (by [ahmedsaoud31](https://github.com/ahmedsaoud31))
+![Laravel best practices](/images/logo.png?raw=true)
 
 It's not a Laravel adaptation of SOLID principles, patterns etc. Here you'll find the best practices which are usually ignored in real life Laravel projects.
 
@@ -151,13 +107,14 @@ Good:
 ```php
 public function index()
 {
-    return view('index', ['clients' => $this->client->getWithNewOrders()]);
+    return view('index', [
+        'clients' => $this->client->getWithNewOrders()
+    ]);
 }
 
 class Client extends Model
 {
-    public function getWithNewOrders()
-    {
+    public function getWithNewOrders(){
         return $this->verified()
             ->with(['orders' => function ($q) {
                 $q->where('created_at', '>', Carbon::today()->subWeek());
@@ -198,8 +155,7 @@ public function store(PostRequest $request)
 
 class PostRequest extends Request
 {
-    public function rules()
-    {
+    function rules(){
         return [
             'title' => 'required|unique:posts|max:255',
             'body' => 'required',
@@ -452,10 +408,10 @@ Prefer to use built-in Laravel functionality and community packages instead of u
 
 Task | Standard tools | 3rd party tools
 ------------ | ------------- | -------------
-Authorization | Policies | Entrust, Sentinel and other packages
+Authorization | Policies | [Bouncer](https://github.com/JosephSilber/bouncer)
 Compiling assets | Laravel Mix | Grunt, Gulp, 3rd party packages
 Development Environment | Laravel Sail, Homestead | Docker
-Deployment | Laravel Forge | Deployer and other solutions
+Deployment | Laravel Forge | Git-Hook
 Unit testing | PHPUnit, Mockery | Phpspec
 Browser testing | Laravel Dusk | Codeception
 DB | Eloquent | SQL, Doctrine
@@ -482,7 +438,7 @@ DB | MySQL, PostgreSQL, SQLite, SQL Server | MongoDB
 
 What | How | Good | Bad
 ------------ | ------------- | ------------- | -------------
-Controller | singular | ArticleController | ~~ArticlesController~~
+Controller | plural | ArticlesController | ~~ArticleController~~
 Route | plural | articles/1 | ~~article/1~~
 Named route | snake_case with dot notation | users.show_active | ~~users.show-active, show-active-users~~
 Model | singular | User | ~~Users~~
