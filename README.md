@@ -424,7 +424,7 @@ DB | MySQL, PostgreSQL, SQLite, SQL Server | MongoDB
 
 What | How | Good | Bad
 ------------ | ------------- | ------------- | -------------
-Controller | plural | ArticlesController | ~~ArticleController~~
+Controller | singular | ArticleController | ~~ArticlesController~~
 Route | plural | articles/1 | ~~article/1~~
 Named route | snake_case with dot notation | users.show_active | ~~users.show-active, show-active-users~~
 Model | singular | User | ~~Users~~
